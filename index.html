@@ -36,6 +36,7 @@
     <nav class="tabs">
       <button data-tab="entry" class="on">Entry</button>
       <button data-tab="today">Today</button>
+      <button data-tab="admin" id="adminTab" hidden>Admin</button>
     </nav>
     </div>
     <div id="entryView">
@@ -47,6 +48,7 @@
       <main id="list"></main>
     </div>
     <div id="todayView" hidden></div>
+    <div id="adminView" hidden></div>
   </section>
 
   <div id="modal" class="modal" hidden><div class="sheet" id="sheet"></div></div>
@@ -54,6 +56,7 @@
 
   <script src="config.js"></script>
   <script src="core.js"></script>
+  <script src="admin.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

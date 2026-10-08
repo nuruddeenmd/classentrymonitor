@@ -86,5 +86,36 @@ button{font:inherit;cursor:pointer}
 .kv span:nth-child(odd){color:var(--grey)}
 .errlist{font-size:.85rem;color:var(--red);margin:6px 0}
 
+#adminView{padding:10px;padding-bottom:calc(40px + env(safe-area-inset-bottom))}
+#adminView input[type=text],#adminView input[type=time],#adminView select{font:inherit;padding:10px;border:2px solid var(--line);border-radius:8px;background:#fff;min-width:0;max-width:100%}
+#adminView input[type=text]{width:100%}
+.amenu{display:grid;gap:8px}
+.amrow{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;padding:14px;background:#fff;border:1px solid var(--line);border-radius:12px;text-align:left}
+.amrow span{font-size:.85rem;max-width:55%;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ahead{display:flex;align-items:center;gap:6px}
+.ahead h2{margin:0;font-size:1.1rem}
+.ahead .link{padding:6px 8px 6px 0}
+.ahint{font-size:.85rem;color:var(--grey);margin:2px 0 8px}
+.alist{display:grid;gap:8px;margin:8px 0}
+.erow{display:flex;gap:6px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:10px;padding:6px}
+.erow.wrap{flex-wrap:wrap}
+.erow input.code{width:84px;flex:none}
+.erow input.pin{width:120px;flex:none}
+.erow input[readonly]{background:#f0f0f0;color:#555}
+.erow select{flex:none}
+.erow input[type=time]{flex:1;min-width:110px}
+.x{flex:none;width:38px;height:38px;border:1px solid var(--line);background:#fff;border-radius:8px;padding:0}
+.x.del{color:var(--red)}
+.addbtn{width:100%;padding:12px;border:2px dashed var(--g);color:var(--g);background:#fff;border-radius:10px;font-weight:600;margin:4px 0 10px}
+.chkl{display:flex;align-items:center;gap:6px;font-size:.9rem}
+.chkl input{width:20px;height:20px}
+#adminView .full{width:100%;margin:6px 0}
+.tt{display:grid;gap:8px;margin:8px 0}
+.ttp{background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px;display:grid;gap:6px}
+.warnnote{color:#8a5a00;background:#fff3d6;border-radius:6px;padding:4px 8px;font-size:.8rem}
+.dz{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0}
+.dz p{margin:4px 0 10px;font-size:.88rem}
+.dzbtn{width:100%;padding:12px;border:0;border-radius:10px;background:var(--red);color:#fff;font-weight:600}
+
 #toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#222;color:#fff;padding:10px 16px;border-radius:999px;font-size:.9rem;opacity:0;pointer-events:none;transition:opacity .2s;z-index:30;max-width:90vw;text-align:center}
 #toast.show{opacity:.95}

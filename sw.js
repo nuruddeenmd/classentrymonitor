@@ -1,6 +1,6 @@
 /* Service worker: makes the app open offline, and syncs queued entries when signal returns. */
-const CACHE = 'class-entry-v2';   // bump this number when you change app files
-const SHELL = ['./', 'index.html', 'style.css', 'app.js', 'core.js', 'config.js',
+const CACHE = 'class-entry-v3';   // bump this number when you change app files
+const SHELL = ['./', 'index.html', 'style.css', 'app.js', 'admin.js', 'core.js', 'config.js',
                'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'icon-maskable-512.png'];
 
 importScripts('config.js', 'core.js');

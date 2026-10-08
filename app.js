@@ -94,6 +94,8 @@
   function render() {
     const d = ymd(new Date());
     if (d !== S.date) { setToday(); S.manual = false; reloadEntries().then(function () { S.period = currentPeriod(); render(); }); return; }
+    if (S.tab === 'admin' && !(S.user && S.user.role === 'Admin')) S.tab = 'entry';
+    $('#adminTab').hidden = !(S.user && S.user.role === 'Admin');
     $('#hdrDate').textContent = S.dateLabel;
     $('#hdrUser').textContent = (S.cfg.school || 'School') + ' · ' + (S.user ? S.user.name : '');
     renderBadge();
@@ -101,7 +103,8 @@
     document.querySelectorAll('.tabs button').forEach(function (b) { b.classList.toggle('on', b.dataset.tab === S.tab); });
     $('#entryView').hidden = S.tab !== 'entry';
     $('#todayView').hidden = S.tab !== 'today';
-    if (S.tab === 'entry') renderEntry(); else renderToday();
+    $('#adminView').hidden = S.tab !== 'admin';
+    if (S.tab === 'entry') renderEntry(); else if (S.tab === 'today') renderToday();
   }
 
   function renderBadge() {
@@ -441,7 +444,7 @@
     if (n && !confirm(n + ' entries are not synced yet. They stay on this phone and will sync after the next sign-in. Sign out anyway?')) return;
     await Core.metaDel('pin'); await Core.metaDel('config'); await Core.metaDel('user'); await Core.metaDel('authBad');
     S.authBad = false;
-    S.cfg = null; S.user = null;
+    S.cfg = null; S.user = null; S.tab = 'entry';
     closeModal();
     showLogin();
   }
@@ -507,6 +510,7 @@
     document.querySelector('.tabs').addEventListener('click', function (e) {
       const b = e.target.closest('button'); if (!b) return;
       S.tab = b.dataset.tab; render();
+      if (S.tab === 'admin' && window.Admin) window.Admin.enter();
     });
     $('#periodBar').addEventListener('click', function (e) {
       const b = e.target.closest('button'); if (!b) return;
@@ -551,6 +555,27 @@
       if (pending().length && navigator.onLine) trySync(false);
     }, 60000);
   }
+
+  /* ───────────── bridge for admin.js ───────────── */
+
+  // Store a fresh config pushed back by the admin screens (without the users list or PINs).
+  async function applyConfig(res) {
+    const c = Object.assign({}, res);
+    delete c.users; delete c.subjects;
+    c.user = S.user;
+    await Core.metaSet('config', c);
+    await Core.metaSet('configAt', new Date().toISOString());
+    loadCfg(c);
+    render();
+  }
+
+  function authFailed() {
+    S.authBad = true;
+    Core.metaSet('authBad', 1);
+    renderBadge();
+  }
+
+  window.AppBridge = { S: S, esc: esc, toast: toast, applyConfig: applyConfig, authFailed: authFailed };
 
   async function init() {
     wire();
