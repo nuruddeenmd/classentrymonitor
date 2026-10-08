@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1b6e4a">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <title>Class Entry Monitor</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <section id="login" hidden>
+    <div class="login-box">
+      <img src="icon-192.png" width="72" height="72" alt="">
+      <h1>Class Entry Monitor</h1>
+      <p class="muted">Sign in to download the timetable. You need internet for this first time only.</p>
+      <input id="pin" type="password" inputmode="numeric" autocomplete="off" placeholder="PIN" maxlength="12">
+      <button id="loginBtn" class="primary">Sign in</button>
+      <p id="loginErr" class="err"></p>
+      <button id="installBtn1" class="link" hidden>Install app on this phone</button>
+    </div>
+  </section>
+
+  <section id="main" hidden>
+    <div class="stick">
+    <header class="top">
+      <div>
+        <div id="hdrDate" class="date"></div>
+        <div id="hdrUser" class="sub"></div>
+      </div>
+      <button id="syncBadge" class="badge" aria-label="Sync status"></button>
+    </header>
+    <div id="clockWarn" class="clockwarn" hidden></div>
+    <nav class="tabs">
+      <button data-tab="entry" class="on">Entry</button>
+      <button data-tab="today">Today</button>
+    </nav>
+    </div>
+    <div id="entryView">
+      <div id="periodBar" class="periods"></div>
+      <div class="bar2">
+        <span id="periodInfo"></span>
+        <label class="chk"><input type="checkbox" id="unmarkedOnly"> Unmarked only</label>
+      </div>
+      <main id="list"></main>
+    </div>
+    <div id="todayView" hidden></div>
+  </section>
+
+  <div id="modal" class="modal" hidden><div class="sheet" id="sheet"></div></div>
+  <div id="toast" role="status"></div>
+
+  <script src="config.js"></script>
+  <script src="core.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
